@@ -63,8 +63,6 @@ module.exports = function(){
                         return done(null, false, { message: msg });
                     }
                 });
-            } else {
-
             }
         });
     }));
