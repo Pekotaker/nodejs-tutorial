@@ -11,6 +11,8 @@ module.exports = function(){
     // Turns a user object into an id
     passport.serializeUser(User.serializeUser()); // serializing the user
     passport.deserializeUser(User.deserializeUser()); // deserializing ther user
+
+    // Login with username
     passport.use("login", new LocalStrategy({
         usernameField: 'username',
         passwordField: 'password'
@@ -18,19 +20,23 @@ module.exports = function(){
         User.findOne({ username: username }, function (err, user) {
             if (err) { return done(err); }
             
+            // Username not found
             if (!user) {
                 loginByUsername = false;
                 
+                // Log in with email address
                 LocalStrategy({
                     usernameField: 'email',
                     passwordField: 'password'
                 },
                         User.findOne({email:username}, function(err, user) {
-                            if (err) {return done(err);}                          
+                            if (err) {return done(err);}   
+                            
+                            // Email not found
                             if (!user) {
                                 msg = "Username or email not found";
                                 return done(null, false, {message: msg});
-                            } else {
+                            } else { // Email address found
 
                                 user.checkPassword(password, function (err, isMatch) {
                                     if (err) {  return done(err); }
@@ -45,6 +51,8 @@ module.exports = function(){
                         })
                 );
             };
+
+            // Username found
             if (loginByUsername == true) {
                 user.checkPassword(password, function (err, isMatch) {
                     if (err) { return done(err); }

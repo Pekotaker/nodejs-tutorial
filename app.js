@@ -16,6 +16,7 @@ const setuppassport = require("./setuppassport");
 // Custom Port
 const Port = 55000;
 
+// Connect to the database that store user's account infomation
 var app = express();
 mongoose.connect(param.DATABASECONNECTION);
 setuppassport();
@@ -23,7 +24,7 @@ setuppassport();
 app.set("port", process.env.PORT || Port); // localhost:Port, use the 'express' module
 app.set("views", path.join(__dirname, "views")); // Join path, use the 'path' module
 app.set("view engine", "ejs"); // load the ejs (Embedded JavaScript templates) views files, use the 'ejs' module
-app.use(bodyparser.urlencoded({extended:false}));
+app.use(bodyparser.urlencoded({extended:false})); // To access the information in the body of a POST request
 app.use(cookieParser());
 app.use(session({
     secret:"NMCNPM_ramdomBullshitHere",
