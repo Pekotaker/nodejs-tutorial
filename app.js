@@ -1,4 +1,4 @@
-// External modules, use 'npm install <module-name>'
+// External modules, use 'npm install <module-name> --save'
 var express = require("express");
 var path = require("path");
 var mongoose = require("mongoose");
