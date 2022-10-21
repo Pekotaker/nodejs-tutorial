@@ -1,25 +1,29 @@
 <%- include('../_partial/_header'); -%>
-    <div class = "col-md-8">
-        <div class = "panel panel-default">
-            <div class = "panel-heading">
+
+    <br/>
+    <div class = "card" style="width: 750px;">
+        <div class = "card">
+            <div class = "card-header text-center">
                 <h3>Log In</h3>
             </div>
-            <div class ="panel-body">
+            <div class ="card-body">
                 <form class = "form-signin" method = "POST" action = "/login">
                     <div class = "input-group">
-                        <span class = "input-group-addon" id="basic-addon1"><span class = "glyphicon glyphicon-user"></span></span>
-                        <input type = "text" id = "text1" class = "form-control" placeholder = "Username or email" name = "username" aria-describedby = "basic-addon1">
+
+                        <input type = "text" id = "text1" class = "form-control" placeholder = "ID or email" name = "studentID" aria-describedby = "basic-addon1">
+                        <br />
                     </div>
                     <br />
                     <div class = "input-group">
-                        <span class = "input-group-addon" id="basic-addon1"><span class = "glyphicon glyphicon-lock" aria-hidden = "true"></span></span>
+
                         <input type = "password" class = "form-control" placeholder="Password" name = "password" aria-describedby="basic-addon1">
+                        <br />
                     </div>
                     <div>
+                        <br/>
+                        <a href = "/register"><i>Create new account</i></a>
                         <br />
-                        <a href = "/signup"><i>Create new account</i></a>
-                        <br />
-                        <input type = "submit" class = "btn btn-default navbar-btn" value = "Log In" onclick = "validate()"/>
+                        <input type = "submit" class = "btn btn-default navbar-btn" value = "Log In" onclick = "validate()" style = "background-color: green; color:white;"/>
                     </div>
                     <script>
                         function validate() {
@@ -27,10 +31,12 @@
                     
                             // CHeck if email
                             if (/\@/.test(field)) {
-                                field.setAttribute("username", "email");
+                                field.setAttribute("studentID", "email");
                             }
                         }
                     </script>
+                
+
                 </form>
             </div>
         </div>

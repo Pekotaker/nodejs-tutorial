@@ -10,7 +10,6 @@ var flash = require("connect-flash");
 
 // Custom-made modules
 var param = require("./params/params")
-var setUpPassport = require("./setuppassport");
 const setuppassport = require("./setuppassport");
 
 // Custom Port
@@ -35,7 +34,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
 
 app.use("/", require("./routes/web"));
 app.use("/api", require("./routes/api"));

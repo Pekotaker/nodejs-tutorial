@@ -1,0 +1,73 @@
+<%- include('../_partial/_header'); -%>
+    <% if(currentUser != null) { %> 
+        
+        <div class = "container">
+            <div class = "row">
+                <div class = "col-sm">  
+                    <h3 ><%= currentUser.studentID %>'s profile</h3>
+                </div>
+                <div class = "col-sm-1">
+                    <a href = "/edit"><button type="button" class="btn btn-outline-secondary">Edit</button></a>
+                </div>
+            </div>  
+        </div>
+        
+        </br>
+        <div>
+                <div class = "container">First name</div>
+                <div class = "container">
+                    <div class = "form-control">
+                        <%= currentUser.fullname.firstname %>
+                    </div>
+                </div>
+            </br>
+            <div class = "container">Last name</div>
+                <div class = "container">
+                    <div class = "form-control">
+                        <%= currentUser.fullname.lastname %>
+                    </div>
+                </div>
+            </br>
+
+                <div class = "container">Email address</div>
+                <div class = "container">
+                    <div class = "form-control">
+                        <%= currentUser.email %>
+                    </div>
+                </div>
+
+            </br>
+                <div class = "container">Phone number</div>
+                <div class = "container">
+                    <div class = "form-control">
+                        <%= currentUser.phoneNumber %>
+                    </div>
+                </div>
+            
+            </br>
+                <div class = "container">Birthday</div>
+                <div class = "container">
+                    <div class = "form-control">
+                        <%= currentUser.birthday %>
+                    </div>
+                </div>
+
+            </br>
+                <div class = "container">Gender</div>
+                <div class = "container">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="gender" id="male" autocomplete="male" value = "male" <% if(currentUser.gender == "male") { %> checked <% } %> disabled>
+                            <label class="btn btn-outline-primary" for="male">Male</label>
+                              
+                            <input type="radio" class="btn-check" name="gender" id="female" autocomplete="female" value = "female" <% if(currentUser.gender == "female") { %> checked <% } %> disabled>
+                            <label class="btn btn-outline-primary" for="female">Female</label>
+                  </div>
+                </div>
+            </br>
+
+                
+            
+            
+          </div>
+    <% } %>
+<%- include('../_partial/_footer'); -%>
