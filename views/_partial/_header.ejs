@@ -14,7 +14,11 @@
         <nav class = "navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #c2ecff;" role = "navigation">
             <div class = "container">
                 <div class="navbar-header">
-                    <a class = "navbar-brand" href ="/">Students Management System</a>
+                    <% if(title == "home" || title == "about" || title == "login" || title == "edit" || title == "profile" || title == "register") { %> 
+                        <a class = "navbar-brand" href ="/">Students Management System</a>
+                    <% } else { %>
+                    <a class = "navbar-brand" href ="/teacher">Students Management System</a>
+                    <% } %>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,17 +26,32 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                        <% if(currentUser != null) { %> 
+                        <% if(currentUser != null && currentUser.accountType == "student") { %> 
                             <li class = "nav-item-active"><a class = "nav-link" href = "/profile"><%= currentUser.studentID %>'s profile</a></li>
                             <li class = "nav-item"><a class = "nav-link" href = "/logout">Log Out</a></li>
                         <% } %>
                         
-                        <% if(currentUser == null && title != "login" && title != "register") { %>
+                        <% if(currentUser == null && title != "login" && title != "register" && (title == "home" || title == "about" || title == "login" || title == "edit" || title == "profile" || title == "register")) { %>
                         <li class = "nav-item"> <a class = "nav-link" href = "/login">Log In</a></li>
                         <li class = "nav-item"><a class = "nav-link" href = "/register">Register</a></li>
                         <% } %>
+
+                        <% if(currentUser != null && currentUser.accountType == "teacher") { %> 
+                            <li class = "nav-item-active"><a class = "nav-link" href = "/teacher/profile"><%= currentUser.teacherID %>'s profile</a></li>
+                            <li class = "nav-item"><a class = "nav-link" href = "/teacher/logout">Log Out</a></li>
+                        <% } %>
+                        
+                        <% if(currentUser == null && title != "teacherlogin" && title != "teacherregister" && (title == "teacherhome" || title == "teacherabout")) { %>
+                        <li class = "nav-item"> <a class = "nav-link" href = "/teacher/login">Log In</a></li>
+                        <li class = "nav-item"><a class = "nav-link" href = "/teacher/register">Register</a></li>
+                        <% } %>
                         <li class = "nav-item">
-                            <a class = "nav-link" href = "/about">About</a>
+                            <% if(title == "home" || title == "about" || title == "login" || title == "edit" || title == "profile" || title == "register") { %> 
+                                <a class = "nav-link" href = "/about">About</a>
+                            <% } else { %>
+                                <a class = "nav-link" href = "/teacher/about">About</a>
+                            <% } %>
+                            
                         </li>
                     </ul>
                 </div>

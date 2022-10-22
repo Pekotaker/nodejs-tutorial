@@ -1,0 +1,93 @@
+<%- include('../../_partial/_header'); -%>
+    <% if(currentUser != null) { %> 
+        <form class="form-signin" method="POST" action="/edit">
+        <div class = "container">
+            <div class = "row">
+                <div class = "col-sm">  
+                    <h3 ><%= currentUser.teacherID %>'s profile</h3>
+                </div>
+                <div class = "col-sm-1">
+                    <input type="submit" class="btn btn-default navbar-btn" value="Save" style = "background-color: green; color:white;"/>
+                </div>
+            </div>  
+        </div>
+        
+        </br>
+        <div>
+            <div class = "container">ID</div>
+            <div class = "container" disabled>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder= "ID" value = <%= currentUser.teacherID %> name="teacherID" aria-describedby="basic-addon1" disabled>
+                </div>
+            </div>
+            <br/>
+                <div class = "container">First name</div>
+                <div class = "container" disabled>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="First name" value = <%= currentUser.fullname.firstname %> name="firstname" aria-describedby="basic-addon1" disabled>
+                    </div>
+                </div>
+            </br>
+            <div class = "container">Last name</div>
+                <div class = "container">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Last name" value = <%= currentUser.fullname.lastname %> name="lastname" aria-describedby="basic-addon1" disabled>
+                    </div>
+                </div>
+            </br>
+
+                <div class = "container">Email address</div>
+                <div class = "container">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Email address" value = <%= currentUser.email %> name="email" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+            </br>
+                <div class = "container">Phone number</div>
+                <div class = "container">
+                    <div class = "input-group">
+                        <input type="text" class="form-control" placeholder="Phone Number" value = <%= currentUser.phoneNumber %> name="phoneNumber" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            
+            </br>
+                <div class = "container">Birthday</div>
+                <div class = "container">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder= "Birthday" value = <%= currentUser.birthday %> name="lastname" aria-describedby="basic-addon1" disabled>
+                    </div>
+                </div>
+
+            </br>
+                <div class = "container">Gender</div>
+                <div class = "container">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="gender" id="male" autocomplete="male" value = "male" <% if(currentUser.gender == "male") { %> checked <% } %> disabled>
+                            <label class="btn btn-outline-primary" for="male">Male</label>
+                              
+                            <input type="radio" class="btn-check" name="gender" id="female" autocomplete="female" value = "female" <% if(currentUser.gender == "female") { %> checked <% } %> disabled>
+                            <label class="btn btn-outline-primary" for="female">Female</label>
+                  </div>
+                </div>
+            </br>
+                <div class = "container">Current password</div>
+                <div class = "container">
+                    <div class="input-group">
+                        <input type="password" class="form-control" placeholder= "Password" name="password" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            <div class = "container">
+
+            <br/>
+                
+            </div>
+            
+
+                
+            
+            
+        </div>
+        </form>
+    <% } %>
+<%- include('../../_partial/_footer'); -%>

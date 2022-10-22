@@ -11,4 +11,5 @@ router.use(function(req, res, next) {
 })
 router.use("/", require("./home"));
 router.use("/profile", require("./profile"));
+router.use("/teacher", require("./teacher"));
 module.exports = router;

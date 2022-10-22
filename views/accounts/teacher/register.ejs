@@ -1,0 +1,75 @@
+<%- include('../../_partial/_header'); -%>
+<br />
+<div class = "card" style="width: 800px;">
+ 
+    <div class="card">
+ 
+        <div class="card-header text-center">
+            <h3>Register</h3>
+        </div>
+        <div class="card-body">
+            <form class="form-signin" method="POST" action="/teacher/register">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="ID" name="teacherID" aria-describedby="basic-addon1">
+                </div>
+                <br />
+                <div class="input-group">
+                    <input type="email" class="form-control" placeholder="Email" name="email" aria-describedby="basic-addon1">
+                </div>
+                <br />
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="First Name" name="firstname" aria-describedby="basic-addon1">
+                </div>
+                <br />
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Last Name" name="lastname" aria-describedby="basic-addon1">
+                </div>
+                <br />
+                <div class = "row">
+                    <div class = "col">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1" style="background-color:white">Birthday</span>
+                            <input class = "form-control" type="date" id="birthday" name="birthday" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class = "col">
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group" id = "gender">
+                            <input type="radio" class="btn-check" name="gender" id="male" autocomplete="male" value = "male" checked>
+                            <label class="btn btn-outline-primary" for="male">Male</label>
+                              
+                            <input type="radio" class="btn-check" name="gender" id="female" autocomplete="female" value = "female">
+                            <label class="btn btn-outline-primary" for="female">Female</label>
+                              
+                            </div>
+                    </div>
+                </div>
+                <br />
+                <div class="input-group">
+                    <input type="phoneNumber" class="form-control" placeholder="Phone Number" name="phoneNumber" aria-describedby="basic-addon1">
+                </div>
+                <br />
+                <div class="input-group">
+                    <input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1">
+                </div>
+                <br />
+                <div class="input-group">
+                    <input type="password" class="form-control" placeholder="Re-password" name="repassword" aria-describedby="basic-addon1">
+                </div>
+                <br />
+                
+                
+                <div>
+                    <a href = "/teacher/login"><i>Already have an account? Click here to log in</i></a>
+                    <br />
+                    <input type="submit" class="btn btn-default navbar-btn" value="New Teacher" style = "background-color: green; color:white;"/>
+                </div>
+                
+ 
+            </form>
+        </div>
+    </div>
+</div>
+ 
+ 
+ 
+<%- include('../../_partial/_footer'); -%>

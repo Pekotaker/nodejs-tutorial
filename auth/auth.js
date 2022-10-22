@@ -9,4 +9,13 @@ var ensureAuth = function ensureAuthenticated(req, res, next) {
     }
 }
 
-module.exports = {ensureAuthenticated: ensureAuth};
+var ensureTeacher = function ensureAuthenticated(req, res, next) {
+    if (req.body.accountType == "teacher") {
+        next();
+    } else {
+        req.flash("info", "You are not a teacher");
+        res.redirect("/teacher/login");
+    }
+}
+
+module.exports = {ensureAuthenticated: {ensureAuth, ensureTeacher}};

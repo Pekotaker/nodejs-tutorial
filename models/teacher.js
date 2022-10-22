@@ -4,16 +4,16 @@ var passportLocalMongoose = require("passport-local-mongoose");
 
 // Basically a factor that play a part in the HASH
 // or encrypt function
-const SALT_FACTOR = 10;
+const SALT_FACTOR = 11;
 
 // The schema of the account info
-var studentSchema = new mongoose.Schema({
+var teacherSchema = new mongoose.Schema({
     username:{
         type:String,
         required:true,
         unique:true
     },
-    studentID:{type:String, required:true, unique:true},
+    teacherID:{type:String, required:true, unique:true},
     email:{type:String, required:true, unique:true},
     password:{type:String, required:true},
     fullname:{
@@ -39,13 +39,13 @@ var studentSchema = new mongoose.Schema({
     },
     accountType:{
         type:String,
-        default:"student",
+        default:"teacher",
     },
     createAt:{type:String, default:Date.now}
 });
 
 // Encrypt the password, or HASH the password
-studentSchema.pre("save", function(done) {
+teacherSchema.pre("save", function(done) {
     var user = this;
 
     if (!user.isModified("password")) {
@@ -66,7 +66,7 @@ studentSchema.pre("save", function(done) {
     });
 });
 
-studentSchema.methods.checkPassword = function(guess, done) {
+teacherSchema.methods.checkPassword = function(guess, done) {
     // If a password is provided, then check
     if (this.password != null) {
         bcrypt.compare(guess, this.password, function(err, isMatch){
@@ -75,8 +75,8 @@ studentSchema.methods.checkPassword = function(guess, done) {
     }
 }
 
-studentSchema.plugin(passportLocalMongoose, {usernameQueryFields: ["email"]});
+teacherSchema.plugin(passportLocalMongoose, {usernameQueryFields: ["email"]});
 
-var Student = mongoose.model("Student", studentSchema);
+var Teacher = mongoose.model("Teacher", teacherSchema);
 
-module.exports = Student;
+module.exports = Teacher;

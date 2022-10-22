@@ -9,16 +9,16 @@ var session = require("express-session");
 var flash = require("connect-flash");
 
 // Custom-made modules
-var param = require("./params/params")
-const setuppassport = require("./setuppassport");
-
+var param = require("./params/params");
+var setuppassport = require("./setuppassport");
 // Custom Port
 const Port = 55000;
 
 // Connect to the database that store user's account infomation
 var app = express();
-mongoose.connect(param.DATABASECONNECTION);
+mongoose.connect(param.USERDATABASE);
 setuppassport();
+
 
 app.set("port", process.env.PORT || Port); // localhost:Port, use the 'express' module
 app.set("views", path.join(__dirname, "views")); // Join path, use the 'path' module
@@ -37,6 +37,8 @@ app.use(flash());
 
 app.use("/", require("./routes/web"));
 app.use("/api", require("./routes/api"));
+
+
 
 // Start the server
 app.listen(app.get("port"), function() {
