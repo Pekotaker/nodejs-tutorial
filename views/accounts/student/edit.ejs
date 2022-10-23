@@ -1,10 +1,10 @@
-<%- include('../../_partial/teacher/_header'); -%>
+<%- include('../../_partial/student/_header'); -%>
     <% if(currentUser != null) { %> 
         <form class="form-signin" method="POST" action="/edit">
         <div class = "container">
             <div class = "row">
                 <div class = "col-sm">  
-                    <h3 ><%= currentUser.teacherID %>'s teacher profile</h3>
+                    <h3 ><%= currentUser.studentID %>'s Student profile</h3>
                 </div>
                 <div class = "col-sm-1">
                     <input type="submit" class="btn btn-default navbar-btn" value="Save" style = "background-color: green; color:white;"/>
@@ -14,10 +14,10 @@
         
         </br>
         <div>
-            <div class = "container">Teacher ID</div>
+            <div class = "container">Student ID</div>
             <div class = "container" disabled>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder= "Teacher ID" value = <%= currentUser.teacherID %> name="teacherID" aria-describedby="basic-addon1" disabled>
+                    <input type="text" class="form-control" placeholder= "ID" value = <%= currentUser.studentID %> name="studentID" aria-describedby="basic-addon1" disabled>
                 </div>
             </div>
             <br/>
@@ -90,4 +90,4 @@
         </div>
         </form>
     <% } %>
-<%- include('../../_partial/teacher/_footer'); -%>
+<%- include('../../_partial/student/_footer'); -%>

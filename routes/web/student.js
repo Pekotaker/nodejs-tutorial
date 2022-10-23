@@ -2,45 +2,45 @@ const { render } = require("ejs");
 var express = require("express");
 var passport = require("passport");
 var ensureAuthenticated = require("../../auth/auth").ensureAuthenticated;
-var teacher = require("../../models/teacher");
+var student = require("../../models/student");
 var router = express.Router();
 
 router.get("/", function(req, res) {
-    res.render("home/teacher/index", {title: "home"});
+    res.render("home/student/index", {title: "home"});
 }); 
 router.get("/about", function(req, res) {
-    res.render("home/teacher/about", {title: "about"});
+    res.render("home/student/about", {title: "about"});
 }); 
 
-router.get("/profile", ensureAuthenticated.ensureTeacher, function(req, res) {
-    res.render("accounts/teacher/profile", {title: "profile"});
+router.get("/profile", ensureAuthenticated.ensureStudent, function(req, res) {
+    res.render("accounts/student/profile", {title: "profile"});
 });
 
 
 router.get("/login", function(req, res) {
-    res.render("accounts/teacher/login", {title: "login"});
+    res.render("accounts/student/login", {title: "login"});
 }); 
 
 router.get("/logout", function(req,res, next) {
     req.logout(function(err) {
         if (err) {return next(err);}
-        res.redirect("/teacher");
+        res.redirect("/student");
     });
 });
 
-router.post("/login", passport.authenticate("teacherlogin", {
-    successRedirect:"/teacher",
-    failureRedirect:"/teacher/login",
+router.post("/login", passport.authenticate("studentlogin", {
+    successRedirect:"/student",
+    failureRedirect:"/student/login",
     failureFlash:true,
     successFlash:true
 }));
 
 router.get("/register", function(req, res) {
-    res.render("accounts/teacher/register", {title: "register"});
+    res.render("accounts/student/register", {title: "register"});
 }); 
 
 router.post("/register", function(req, res, next) {
-    var teacherID = req.body.teacherID;
+    var studentID = req.body.studentID;
     var email = req.body.email;
     var firstname = req.body.firstname;
     var lastname = req.body.lastname;
@@ -50,58 +50,58 @@ router.post("/register", function(req, res, next) {
     var password = req.body.password;
     var repassword = req.body.repassword;
     
-    if (!teacherID) {
+    if (!studentID) {
         req.flash("error", "Please fill in an ID");
-        return res.redirect("/teacher/register");
+        return res.redirect("/student/register");
     }
     if (!email) {
         req.flash("error", "Please fill in an email");
-        return res.redirect("/teacher/register");
+        return res.redirect("/student/register");
     }
     if (!firstname || !lastname) {
         req.flash("error", "Please fill in your full name");
-        return res.redirect("/teacher/register");
+        return res.redirect("/student/register");
     }
     if(!birthday) {
         req.flash("error", "Please fill in your birthday");
-        return res.redirect("/teacher/register");
+        return res.redirect("/student/register");
     }
     if (!phoneNumber ) {
         req.flash("error", "Please fill in a phone number");
-        return res.redirect("/teacher/register");
+        return res.redirect("/student/register");
     }
     if (!password) {
         req.flash("error", "Please fill in a password");
-        return res.redirect("/teacher/register");
+        return res.redirect("/student/register");
     }
     if (password != repassword) {
         req.flash("error", "Password does not match");
-        return res.redirect("/teacher/register")
+        return res.redirect("/student/register")
     }
 
-    teacher.findOne({teacherID:teacherID}, function(err, user) {
+    student.findOne({studentID:studentID}, function(err, user) {
         if (err) {return next(err);}
         if (user) {
             req.flash("error", "ID's already existed");
-            return res.redirect("/teacher/register");
+            return res.redirect("/student/register");
         }
 
-        teacher.findOne({email:email}, function(err, user) {
+        student.findOne({email:email}, function(err, user) {
             if (err) {return next(err);}
             if (user) {
                 req.flash("error", "There's already an account with this email");
-                return res.redirect("/teacher/register");
+                return res.redirect("/student/register");
             }
 
-            teacher.findOne({phoneNumber:phoneNumber}, function(err, user) {
+            student.findOne({phoneNumber:phoneNumber}, function(err, user) {
                 if (err) {return next(err);}
                 if (user) {
                     req.flash("error", "There's already an account with this phone number");
-                    return res.redirect("/teacher/register");
+                    return res.redirect("/student/register");
                 }
-                var newUser = new teacher({
-                    username:teacherID,
-                    teacherID:teacherID,
+                var newUser = new student({
+                    username:studentID,
+                    studentID:studentID,
                     password:password,
                     email:email,
                     fullname:{
@@ -123,38 +123,38 @@ router.post("/register", function(req, res, next) {
     });
     
     
-}, passport.authenticate("teacherregister", {
-    successRedirect:"/teacher",
-    failureRedirect:"/teacher/register",
+}, passport.authenticate("studentregister", {
+    successRedirect:"/student",
+    failureRedirect:"/student/register",
     failureFlash:true,
     successFlash:true
 }));
 
-router.get("/edit", ensureAuthenticated.ensureTeacher, function(req, res) {
-    res.render("accounts/teacher/edit", {title: "edit"});
+router.get("/edit", ensureAuthenticated.ensureStudent, function(req, res) {
+    res.render("accounts/student/edit", {title: "edit"});
 });
 
-router.post("/edit", ensureAuthenticated.ensureTeacher, function(req, res, next) {
-    teacher.findById(req.user.id, function(err, user) {
+router.post("/edit", ensureAuthenticated.ensureStudent, function(req, res, next) {
+    student.findById(req.user.id, function(err, user) {
         if(!user) {
-            req.flash("error", "Teacher not found");
-            return res.redirect("/teacher/edit");
+            req.flash("error", "student not found");
+            return res.redirect("/student/edit");
         }
-        req.body.teacherID = user.teacherID;
+        req.body.studentID = user.studentID;
         var emailEdit = req.body.email.trim();
         var phoneNumberEdit = req.body.phoneNumber.trim();
         var password = req.body.password;
         if (!emailEdit) {
             req.flash("error", "Email name cannot be empty");
-            return res.redirect('/teacher/edit');
+            return res.redirect('/student/edit');
         }
         if (!phoneNumberEdit) {
             req.flash("error", "Phone Number cannot be empty");
-            return res.redirect('/teacher/edit');
+            return res.redirect('/student/edit');
         }
         if (!password) {
             req.flash("error" , "Invalid password");
-            return res.redirect("/teacher/edit");
+            return res.redirect("/student/edit");
         } else {
             user.checkPassword(password, function (err, isMatch) {
                 if (err) {  return done(err); }
@@ -169,7 +169,7 @@ router.post("/edit", ensureAuthenticated.ensureTeacher, function(req, res, next)
                     });
                 } else {
                     req.flash("error" , "Invalid password");
-                    return res.redirect("/teacher/edit");
+                    return res.redirect("/student/edit");
                 }
             });
         }  
@@ -177,9 +177,9 @@ router.post("/edit", ensureAuthenticated.ensureTeacher, function(req, res, next)
     });
     
 
-}, passport.authenticate("teacheredit", {
-    successRedirect:"/teacher/profile",
-    failureRedirect:"/teacher/edit",
+}, passport.authenticate("studentedit", {
+    successRedirect:"/student/profile",
+    failureRedirect:"/student/edit",
     failureFlash:true,
     successFlash:true
 }));

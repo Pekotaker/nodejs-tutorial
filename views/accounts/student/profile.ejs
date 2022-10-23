@@ -1,13 +1,13 @@
-<%- include('../../_partial/teacher/_header'); -%>
+<%- include('../../_partial/student/_header'); -%>
     <% if(currentUser != null) { %> 
         
         <div class = "container">
             <div class = "row">
                 <div class = "col-sm">  
-                    <h3 ><%= currentUser.teacherID %>'s Teacher profile</h3>
+                    <h3 ><%= currentUser.studentID %>'s Student profile</h3>
                 </div>
                 <div class = "col-sm-1">
-                    <a href = "/teacher/edit"><button type="button" class="btn btn-outline-secondary">Edit</button></a>
+                    <a href = "/student/edit"><button type="button" class="btn btn-outline-secondary">Edit</button></a>
                 </div>
             </div>  
         </div>
@@ -70,4 +70,4 @@
             
           </div>
     <% } %>
-<%- include('../../_partial/teacher/_footer'); -%>
+<%- include('../../_partial/student/_footer'); -%>

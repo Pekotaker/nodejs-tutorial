@@ -10,6 +10,7 @@ router.use(function(req, res, next) {
     next();
 })
 router.use("/", require("./home"));
-router.use("/profile", require("./profile"));
+router.use("/admin", require("./admin"));
 router.use("/teacher", require("./teacher"));
+router.use("/student", require("./student"));
 module.exports = router;

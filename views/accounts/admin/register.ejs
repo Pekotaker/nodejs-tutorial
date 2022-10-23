@@ -1,4 +1,4 @@
-<%- include('../../_partial/teacher/_header'); -%>
+<%- include('../../_partial/admin/_header'); -%>
 <br />
 <div class = "card" style="width: 800px;">
  
@@ -8,9 +8,9 @@
             <h3>Register</h3>
         </div>
         <div class="card-body">
-            <form class="form-signin" method="POST" action="/teacher/register">
+            <form class="form-signin" method="POST" action="/admin/register">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Teacher ID" name="teacherID" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="Administrator ID" name="adminID" aria-describedby="basic-addon1">
                 </div>
                 <br />
                 <div class="input-group">
@@ -59,9 +59,9 @@
                 
                 
                 <div>
-                    <a href = "/teacher/login"><i>Already have an account? Click here to log in</i></a>
+                    <a href = "/admin/login"><i>Already have an account? Click here to log in</i></a>
                     <br />
-                    <input type="submit" class="btn btn-default navbar-btn" value="New Teacher" style = "background-color: green; color:white;"/>
+                    <input type="submit" class="btn btn-default navbar-btn" value="New Administrator" style = "background-color: green; color:white;"/>
                 </div>
                 
  
@@ -72,4 +72,4 @@
  
  
  
-<%- include('../../_partial/teacher/_footer'); -%>
+<%- include('../../_partial/admin/_footer'); -%>
